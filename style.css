@@ -1,0 +1,333 @@
+/* --- Global Styles & Variables --- */
+:root {
+    --primary-color: #ffffff;
+    --secondary-color: #cccccc;
+    --accent-color: #00bfff; /* Deep Sky Blue */
+    --background-start: #0c0c1d;
+    --background-end: #1d1d3b;
+    --card-background: rgba(255, 255, 255, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--primary-color);
+    background-color: var(--background-start);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* --- Animated Sky Background --- */
+.sky-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    background: linear-gradient(145deg, var(--background-start), var(--background-end));
+    background-size: 400% 400%;
+    animation: gradient-animation 20s ease infinite;
+}
+
+@keyframes gradient-animation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.star {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle 5s infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1); }
+}
+
+/* --- Header & Navigation --- */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--secondary-color);
+    font-weight: 400;
+    transition: color 0.3s ease;
+    padding: 5px 0;
+    position: relative;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--primary-color);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+
+/* --- Main Content & Sections --- */
+main {
+    padding-top: 80px; /* Offset for fixed header */
+}
+
+.content-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.content-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* --- Glassmorphism Card Style --- */
+.card {
+    background: var(--card-background);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 900px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--accent-color);
+    margin-bottom: 2rem;
+}
+
+p, ul {
+    color: var(--secondary-color);
+    font-size: 1rem;
+}
+
+/* --- Specific Section Styles --- */
+
+/* About Section */
+.about-card {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.profile-photo {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid var(--accent-color);
+}
+
+.about-text h2 {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+}
+
+/* Experience Section (Timeline) */
+.timeline {
+    position: relative;
+    padding-left: 2rem;
+    border-left: 2px solid var(--accent-color);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+}
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -2.7rem;
+    top: 5px;
+    width: 16px;
+    height: 16px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    border: 3px solid var(--background-end);
+}
+
+.timeline-content h3 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.2rem;
+}
+
+.timeline-date {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.timeline-content ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+}
+
+/* Education Section */
+.certificate-container {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.certificate-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 1rem;
+}
+
+/* Resume & Contact Sections */
+.text-center {
+    text-align: center;
+}
+
+.contact-info p {
+    margin: 1rem 0;
+}
+.contact-info a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: text-decoration 0.3s;
+}
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+/* --- Buttons --- */
+.button {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.button:hover {
+    transform: translateY(-3px);
+    background-color: #00a0d1;
+}
+
+.download-button {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 2rem;
+    background: var(--background-start);
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Simplification for mobile, could add hamburger menu */
+    }
+
+    .about-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-photo {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 1rem;
+    }
+
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 1.2rem; }
+    .card { padding: 2rem; }
+
+    .timeline {
+        padding-left: 1rem;
+    }
+    .timeline-dot {
+        left: -1.7rem;
+    }
+}
